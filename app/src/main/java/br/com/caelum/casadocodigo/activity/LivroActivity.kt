@@ -1,7 +1,8 @@
-package br.com.caelum.casadocodigo
+package br.com.caelum.casadocodigo.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import br.com.caelum.casadocodigo.R
 import br.com.caelum.casadocodigo.fragment.ListaDeLivrosFragment
 
 class LivroActivity : AppCompatActivity() {
