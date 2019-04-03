@@ -8,10 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.caelum.casadocodigo.R
 import br.com.caelum.casadocodigo.adapter.LivroAdapter
-import br.com.caelum.casadocodigo.modelo.Livro
+import br.com.caelum.casadocodigo.viewmodel.LivroViewModel
 import kotlinx.android.synthetic.main.lista_fragment.view.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class ListaDeLivrosFragment : Fragment() {
+
+    private val viewModel: LivroViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,20 +23,7 @@ class ListaDeLivrosFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.lista_fragment, container, false)
 
-        val lista = arrayListOf(
-            Livro("Java"),
-            Livro("Kotlin"),
-            Livro("Swift"),
-            Livro("Java"),
-            Livro("Kotlin"),
-            Livro("Swift"),
-            Livro("Java"),
-            Livro("Kotlin"),
-            Livro("Swift"),
-            Livro("Java"),
-            Livro("Kotlin"),
-            Livro("Swift")
-        )
+        val lista = viewModel.pegaLivros()
 
         view.listaLivros.adapter = LivroAdapter(lista)
         view.listaLivros.layoutManager = LinearLayoutManager(context)
