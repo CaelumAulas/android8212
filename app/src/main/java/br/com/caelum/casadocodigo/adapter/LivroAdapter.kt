@@ -9,7 +9,10 @@ import br.com.caelum.casadocodigo.R
 import br.com.caelum.casadocodigo.modelo.Livro
 import kotlinx.android.synthetic.main.item_livro.view.*
 
-class LivroAdapter(val lista: ArrayList<Livro>) : RecyclerView.Adapter<LivroAdapter.ViewHolder>() {
+class LivroAdapter(
+    val lista: ArrayList<Livro>,
+    val listener: LivroListener
+) : RecyclerView.Adapter<LivroAdapter.ViewHolder>() {
 
 
     override fun getItemCount(): Int {
@@ -29,11 +32,29 @@ class LivroAdapter(val lista: ArrayList<Livro>) : RecyclerView.Adapter<LivroAdap
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val livro = lista[position]
 
-        holder.nomeLivro.text = livro.nome
+        holder.bind(livro)
 
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val nomeLivro = view.itemLivroNome
+
+
+        fun bind(livro: Livro) {
+
+            nomeLivro.text = livro.nome
+
+            view.setOnClickListener {
+                listener.onClick(livro)
+            }
+
+        }
+    }
+
+    interface LivroListener {
+
+
+        fun onClick(livro: Livro)
+
     }
 }

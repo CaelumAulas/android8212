@@ -8,11 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.caelum.casadocodigo.R
 import br.com.caelum.casadocodigo.adapter.LivroAdapter
+import br.com.caelum.casadocodigo.adapter.LivroAdapter.LivroListener
+import br.com.caelum.casadocodigo.modelo.Livro
 import br.com.caelum.casadocodigo.viewmodel.LivroViewModel
 import kotlinx.android.synthetic.main.lista_fragment.view.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
-class ListaDeLivrosFragment : Fragment() {
+class ListaDeLivrosFragment : Fragment(), LivroListener {
 
     private val viewModel: LivroViewModel by sharedViewModel()
 
@@ -25,9 +27,15 @@ class ListaDeLivrosFragment : Fragment() {
 
         val lista = viewModel.pegaLivros()
 
-        view.listaLivros.adapter = LivroAdapter(lista)
+        view.listaLivros.adapter = LivroAdapter(lista, this)
         view.listaLivros.layoutManager = LinearLayoutManager(context)
+
 
         return view
     }
+
+    override fun onClick(livro: Livro) {
+        viewModel.seleciona(livro)
+    }
+
 }
