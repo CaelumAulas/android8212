@@ -22,9 +22,11 @@ class LivroActivity : AppCompatActivity() {
         exibe(ListaDeLivrosFragment())
 
 
-        viewModel.getLivroSelecionado().observe(this, Observer {
+        viewModel.getLivroSelecionado().observe(this, Observer { livro ->
 
-            exibe(DetalhesDoLivroFragment(), true)
+            if (livro != null) {
+                exibe(DetalhesDoLivroFragment(), true)
+            }
         })
 
 
@@ -38,5 +40,13 @@ class LivroActivity : AppCompatActivity() {
         transaction.replace(R.id.container, fragment)
         if (deveEmpilhar) transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        viewModel.desmarcaLivro()
+
     }
 }

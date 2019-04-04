@@ -19,4 +19,7 @@ class LivroViewModel(private val repository: LivroRepository) : ViewModel() {
 
     }
 
+    fun desmarcaLivro() {
+        livroLiveData.postValue(null)
+    }
 }
