@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import br.com.caelum.casadocodigo.R
 import br.com.caelum.casadocodigo.modelo.Livro
@@ -16,6 +17,22 @@ class DetalhesDoLivroFragment : Fragment() {
 
     private val viewModel: LivroViewModel by sharedViewModel()
 
+    private lateinit var livro: Livro
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        livro = viewModel.getLivroSelecionado().value!!
+
+
+        val activity = activity as AppCompatActivity
+
+        activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        activity.supportActionBar?.title = livro.nome
+        activity.supportActionBar?.subtitle = livro.data
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -24,7 +41,6 @@ class DetalhesDoLivroFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.detalhes_fragment, container, false)
 
-        val livro = viewModel.getLivroSelecionado().value!!
 
         view.nome_livro_detalhes.text = livro.nome
 

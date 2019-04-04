@@ -1,6 +1,7 @@
 package br.com.caelum.casadocodigo.activity
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -30,6 +31,17 @@ class LivroActivity : AppCompatActivity() {
         })
 
 
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        if (item.itemId == android.R.id.home) {
+            onBackPressed()
+        }
+
+
+        return true
     }
 
     private fun exibe(

@@ -3,7 +3,7 @@ package br.com.caelum.casadocodigo.modelo
 data class Livro(
     val nome: String,
     val foto: String = "",
-    val data: String = "",
+    val data: String = "04/04/2019",
     val isbn: String = "",
     val autores: List<Autor> = emptyList(),
     val precoFisico: Double = 0.0,
