@@ -28,9 +28,11 @@
 
 
         <TextView
+                android:textColor="#000"
+                android:fontFamily="sans-serif-black"
                 android:gravity="center"
                 android:text="Kotlin"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:id="@+id/itemLivroNome"
                 android:layout_width="0dp"
                 android:layout_height="0dp"

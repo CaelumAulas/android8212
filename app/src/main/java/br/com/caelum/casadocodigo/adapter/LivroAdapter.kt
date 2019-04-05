@@ -7,7 +7,10 @@ import android.widget.BaseAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.caelum.casadocodigo.R
 import br.com.caelum.casadocodigo.modelo.Livro
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_livro.view.*
+import java.lang.Exception
 
 class LivroAdapter(
     val lista: ArrayList<Livro>,
@@ -39,10 +42,32 @@ class LivroAdapter(
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val nomeLivro = view.itemLivroNome
 
+        val foto = view.itemLivroImagem
 
         fun bind(livro: Livro) {
 
             nomeLivro.text = livro.nome
+
+
+            val picasso = Picasso.get()
+
+            picasso.setIndicatorsEnabled(true)
+
+            var url = livro.foto
+
+            if (url.startsWith("http:")) {
+                url = url.replace("http:", "https:")
+            }
+
+            picasso.load(url).fit().into(foto, object : Callback {
+                override fun onSuccess() {
+
+                }
+
+                override fun onError(e: Exception?) {
+                    picasso.load(android.R.drawable.ic_dialog_alert).into(foto)
+                }
+            })
 
             view.setOnClickListener {
                 listener.onClick(livro)

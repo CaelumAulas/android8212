@@ -18,9 +18,7 @@ class LivroViewModel(private val repository: LivroRepository) : ViewModel() {
 
     fun seleciona(livro: Livro) {
         livroLiveData.postValue(livro)
-
     }
-
     fun desmarcaLivro() {
         livroLiveData.postValue(null)
     }
