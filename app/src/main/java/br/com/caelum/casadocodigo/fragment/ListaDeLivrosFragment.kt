@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.caelum.casadocodigo.R
 import br.com.caelum.casadocodigo.adapter.LivroAdapter
@@ -29,6 +30,8 @@ class ListaDeLivrosFragment : Fragment(), LivroListener {
 
         activity.supportActionBar?.title = "Catalogo"
         activity.supportActionBar?.subtitle = ""
+
+        viewModel.buscaLivros()
     }
 
     override fun onCreateView(
@@ -36,12 +39,15 @@ class ListaDeLivrosFragment : Fragment(), LivroListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val view = inflater.inflate(R.layout.lista_fragment, container, false)
 
-        val lista = viewModel.pegaLivros()
+        viewModel.pegaLivros().observe(this, Observer { lista ->
 
-        view.listaLivros.adapter = LivroAdapter(lista, this)
-        view.listaLivros.layoutManager = LinearLayoutManager(context)
+            view.listaLivros.adapter = LivroAdapter(lista, this)
+            view.listaLivros.layoutManager = LinearLayoutManager(context)
+        })
+
 
 
         return view

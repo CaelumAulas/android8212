@@ -12,7 +12,9 @@ class LivroViewModel(private val repository: LivroRepository) : ViewModel() {
 
     fun getLivroSelecionado() = livroLiveData as LiveData<Livro>
 
-    fun pegaLivros() = repository.getLista()
+    fun pegaLivros() = repository.getLivros()
+
+    fun buscaLivros() = repository.buscaLivros()
 
     fun seleciona(livro: Livro) {
         livroLiveData.postValue(livro)
