@@ -15,5 +15,8 @@ class Carrinho {
         itens.remove(item)
     }
 
+
+    fun valorTotal(): Double = itens.sumByDouble { item -> item.getValor() }
+
     fun getLista() = Collections.unmodifiableList(itens)
 }
