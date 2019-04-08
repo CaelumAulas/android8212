@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <RadioButton
+            android:id="@+id/radioEbook"
+            android:text="Ebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <RadioButton
+            android:id="@+id/radioFisico"
+            android:text="Fisico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <RadioButton
+            android:id="@+id/radioAmbos"
+            android:checked="true"
+            android:text="Ambos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+</RadioGroup>
