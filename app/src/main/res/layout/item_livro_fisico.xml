@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent" android:layout_height="120dp"
+        android:layout_margin="15dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineVertical"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.3"
+        />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.4"
+        />
+
+
+        <ImageView
+                android:id="@+id/itemFoto"
+                app:layout_constraintEnd_toEndOf="@id/guidelineVertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="0dp"/>
+
+        <TextView
+                android:id="@+id/itemNome"
+                app:layout_constraintStart_toStartOf="@id/guidelineVertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/guidelineHorizontal"
+                android:gravity="center"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:text="NOME DO LIVRO"
+                android:layout_width="0dp"
+                android:layout_height="0dp"/>
+
+        <TextView
+                android:id="@+id/itemISBN"
+                android:layout_margin="10dp"
+                app:layout_constraintStart_toStartOf="@id/guidelineVertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/guidelineHorizontal"
+                android:text="ISBN"
+                android:layout_width="0dp"
+                android:layout_height="0dp"/>
+
+        <TextView
+                android:id="@+id/itemPreco"
+                android:layout_margin="10dp"
+                android:gravity="bottom|end"
+                app:layout_constraintStart_toStartOf="@id/guidelineVertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/guidelineHorizontal"
+                android:text="VALOR"
+                android:layout_width="0dp"
+                android:layout_height="0dp"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

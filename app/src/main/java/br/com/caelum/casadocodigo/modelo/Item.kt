@@ -4,7 +4,7 @@ import br.com.caelum.casadocodigo.modelo.TipoDeLivro.*
 
 sealed class Item(
     val livro: Livro,
-    private val tipo: TipoDeLivro
+    val tipo: TipoDeLivro
 ) {
 
     fun getValor(): Double = when (tipo) {
