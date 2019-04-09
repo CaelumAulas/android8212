@@ -8,11 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.caelum.casadocodigo.R
 import br.com.caelum.casadocodigo.adapter.ItemAdapter
+import br.com.caelum.casadocodigo.adapter.ItemAdapter.ItemListener
 import br.com.caelum.casadocodigo.modelo.Carrinho
+import br.com.caelum.casadocodigo.modelo.Item
 import kotlinx.android.synthetic.main.activity_carrinho.*
 import org.koin.android.ext.android.inject
 
-class CarrinhoActivity : AppCompatActivity() {
+class CarrinhoActivity : AppCompatActivity(), ItemListener {
+
 
     private val carrinho: Carrinho by inject()
 
@@ -23,11 +26,17 @@ class CarrinhoActivity : AppCompatActivity() {
         supportActionBar?.subtitle = "R$ ${carrinho.valorTotal()}"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        listaItens.adapter = ItemAdapter(carrinho.getLista())
+        listaItens.adapter = ItemAdapter(carrinho.getLista(), this)
         listaItens.layoutManager = LinearLayoutManager(this)
 
     }
 
+
+    override fun onClick(item: Item, position: Int) {
+        carrinho.remove(item)
+        listaItens.adapter?.notifyItemRemoved(position)
+        supportActionBar?.subtitle = "R$ ${carrinho.valorTotal()}"
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 

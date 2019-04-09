@@ -7,12 +7,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.caelum.casadocodigo.R
+import br.com.caelum.casadocodigo.adapter.ItemAdapter.ItemListener
 import br.com.caelum.casadocodigo.adapter.ItemViewHolder.*
 import br.com.caelum.casadocodigo.modelo.Item
 import br.com.caelum.casadocodigo.modelo.TipoDeLivro
 import com.squareup.picasso.Picasso
 
-class ItemAdapter(private val itens: List<Item>) : RecyclerView.Adapter<ItemViewHolder>() {
+class ItemAdapter(private val itens: List<Item>, private val listener: ItemListener) :
+    RecyclerView.Adapter<ItemViewHolder>() {
 
     override fun getItemCount(): Int = itens.size
 
@@ -21,13 +23,13 @@ class ItemAdapter(private val itens: List<Item>) : RecyclerView.Adapter<ItemView
         val inflater = LayoutInflater.from(parent.context)
         if (viewType == 1) {
             val view = inflater.inflate(R.layout.item_livro_fisico, parent, false)
-            return ItemFisicoVH(view)
+            return ItemFisicoVH(view, listener)
         } else if (viewType == 2) {
             val view = inflater.inflate(R.layout.item_livro_virtual, parent, false)
-            return ItemVirtualVH(view)
+            return ItemVirtualVH(view, listener)
         } else {
             val view = inflater.inflate(R.layout.item_livro_ambos, parent, false)
-            return ItemAmbosVH(view)
+            return ItemAmbosVH(view, listener)
         }
     }
 
@@ -44,9 +46,17 @@ class ItemAdapter(private val itens: List<Item>) : RecyclerView.Adapter<ItemView
             TipoDeLivro.AMBOS -> return 3
         }
     }
+
+
+    interface ItemListener {
+        fun onClick(item: Item, position: Int)
+    }
 }
 
-sealed class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+sealed class ItemViewHolder(
+    view: View,
+    val listener: ItemListener
+) : RecyclerView.ViewHolder(view) {
 
     internal val itemPreco: TextView = view.findViewById(R.id.itemPreco)
     private val itemNome: TextView = view.findViewById(R.id.itemNome)
@@ -62,9 +72,13 @@ sealed class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
 
         Picasso.get().load(url).fit().into(itemFoto)
+
+        itemView.setOnClickListener {
+            listener.onClick(item, adapterPosition)
+        }
     }
 
-    class ItemFisicoVH(view: View) : ItemViewHolder(view) {
+    class ItemFisicoVH(view: View, listener: ItemListener) : ItemViewHolder(view, listener) {
 
         private val itemISBN: TextView = view.findViewById(R.id.itemISBN)
 
@@ -77,7 +91,7 @@ sealed class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    class ItemVirtualVH(view: View) : ItemViewHolder(view) {
+    class ItemVirtualVH(view: View, listener: ItemListener) : ItemViewHolder(view, listener) {
 
         private val itemAutores: TextView = view.findViewById(R.id.itemAutores)
 
@@ -90,7 +104,7 @@ sealed class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    class ItemAmbosVH(view: View) : ItemViewHolder(view) {
+    class ItemAmbosVH(view: View, listener: ItemListener) : ItemViewHolder(view, listener) {
 
         private val itemDataPub: TextView = view.findViewById(R.id.itemDataPub)
 
