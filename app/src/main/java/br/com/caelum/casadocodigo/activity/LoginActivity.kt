@@ -22,19 +22,33 @@ class LoginActivity : AppCompatActivity() {
         authentication = FirebaseAuth.getInstance()
 
         login_novo.setOnClickListener {
-            val email = login_email.text.toString()
-            val senha = login_senha.text.toString()
+            val (email, senha) = getInfosDaTela()
             authentication
                 .createUserWithEmailAndPassword(email, senha)
-                .addOnCompleteListener(object : OnCompleteListener<AuthResult> {
-                    override fun onComplete(task: Task<AuthResult>) {
-
-                        if (task.isSuccessful) {
-                            vaiParaCatalogo()
-                        }
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        vaiParaCatalogo()
                     }
-                })
+                }
         }
+
+        login_logar.setOnClickListener {
+            val (email, senha) = getInfosDaTela()
+
+            authentication
+                .signInWithEmailAndPassword(email, senha)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        vaiParaCatalogo()
+                    }
+                }
+        }
+    }
+
+    private fun getInfosDaTela(): Pair<String, String> {
+        val email = login_email.text.toString()
+        val senha = login_senha.text.toString()
+        return Pair(email, senha)
     }
 
     private fun vaiParaCatalogo() {
