@@ -31,7 +31,6 @@ class ListaDeLivrosFragment : Fragment(), LivroListener {
         activity.supportActionBar?.title = "Catalogo"
         activity.supportActionBar?.subtitle = ""
 
-        viewModel.buscaLivros()
     }
 
     override fun onCreateView(

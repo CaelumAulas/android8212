@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import br.com.caelum.casadocodigo.R
+import br.com.caelum.casadocodigo.fragment.CarregandoFragment
 import br.com.caelum.casadocodigo.fragment.DetalhesDoLivroFragment
 import br.com.caelum.casadocodigo.fragment.ListaDeLivrosFragment
 import br.com.caelum.casadocodigo.viewmodel.LivroViewModel
@@ -23,8 +24,13 @@ class LivroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_livro)
 
-        exibe(ListaDeLivrosFragment())
+        exibe(CarregandoFragment())
 
+
+        viewModel.pegaLivros().observe(this, Observer {
+
+            exibe(ListaDeLivrosFragment())
+        })
 
         viewModel.getLivroSelecionado().observe(this, Observer { livro ->
 
