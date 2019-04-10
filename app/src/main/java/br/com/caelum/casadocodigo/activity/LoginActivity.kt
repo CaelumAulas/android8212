@@ -4,10 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import br.com.caelum.casadocodigo.R
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.firebase.FirebaseApp
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -20,6 +16,11 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         authentication = FirebaseAuth.getInstance()
+
+
+        if (authentication.currentUser != null) {
+            vaiParaCatalogo()
+        }
 
         login_novo.setOnClickListener {
             val (email, senha) = getInfosDaTela()

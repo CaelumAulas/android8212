@@ -5,6 +5,10 @@
             android:id="@+id/menuCarrinho"
             android:title="Carrinho"
             app:showAsAction="always"
-            android:icon="@drawable/ic_carrinho"
-    />
+            android:icon="@drawable/ic_carrinho"/>
+
+    <item
+            android:id="@+id/menuSair"
+            android:title="Sair"/>
+
 </menu>

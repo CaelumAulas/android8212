@@ -11,6 +11,7 @@ import br.com.caelum.casadocodigo.R
 import br.com.caelum.casadocodigo.fragment.DetalhesDoLivroFragment
 import br.com.caelum.casadocodigo.fragment.ListaDeLivrosFragment
 import br.com.caelum.casadocodigo.viewmodel.LivroViewModel
+import com.google.firebase.auth.FirebaseAuth
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LivroActivity : AppCompatActivity() {
@@ -54,6 +55,15 @@ class LivroActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+        if (item.itemId == R.id.menuSair) {
+
+            FirebaseAuth.getInstance().signOut()
+
+            finish()
+            startActivity(Intent(this, LoginActivity::class.java))
+
+        }
 
         return true
     }
