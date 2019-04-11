@@ -35,6 +35,7 @@ class ServicoDeNotificacao : FirebaseMessagingService() {
             .setContentText("Você foi mega premiado no app, clique aqui e veja o que voce ganhou")
             .setContentIntent(procuracao)
             .setSmallIcon(R.drawable.ic_book)
+            .setAutoCancel(true)
             .build()
     }
     private fun criandoPendingIntent(): PendingIntent {
